@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  server:
+    build: .
+    depends_on: [redis]
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      DATA_DIR: /data
+      RPC_PORT: 18861
+    volumes:
+      - ./server/texts:/data:ro
+      - ./server:/app
+    command: ["python", "/app/server.py"]
+    ports:
+      - "18861:18861"
+
+  client:
+    build: .
+    depends_on: [server]
+    environment:
+      SERVER_HOST: server
+      SERVER_PORT: 18861
+      OUT_CSV: /app/latency.csv
+    volumes:
+      - ./client:/app
