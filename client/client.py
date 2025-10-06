@@ -7,14 +7,11 @@ OUT_CSV = os.getenv("OUT_CSV", "/app/latency.csv")
 
 # Example workload: (fileRef, keyword)
 REQUESTS = [
-    ("mobydick.txt", "whale"),
-    ("mobydick.txt", "the"),
-    ("hamlet.txt", "hamlet"),
-    ("hamlet.txt", "king"),
-    ("hamlet.txt", "the"),
-    # Repeat some to demonstrate cache hits
-    ("mobydick.txt", "whale"),
-    ("hamlet.txt", "king"),
+    ("bee_movie_script.txt", "bee"),
+    ("bee_movie_script.txt", "honey"),
+    ("bee_movie_script.txt", "the"),
+    ("bee_movie_script.txt", "you"),
+    ("bee_movie_script.txt", "Barry"),
 ]
 
 def main():
