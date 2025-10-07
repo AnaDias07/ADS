@@ -12,6 +12,8 @@ REQUESTS = [
     ("bee_movie_script.txt", "the"),
     ("bee_movie_script.txt", "you"),
     ("bee_movie_script.txt", "Barry"),
+    ("bee_movie_script.txt", "bee"),
+    ("bee_movie_script.txt", "honey"),
 ]
 
 def main():
