@@ -3,7 +3,7 @@ services:
     image: redis:7-alpine
     ports: ["6379:6379"]
 
-  server:
+  server1:
     build: .
     depends_on: [redis]
     environment:
@@ -15,15 +15,56 @@ services:
       - ./server/texts:/data:ro
       - ./server:/app
     command: ["python", "/app/server.py"]
+    ports: ["18861:18861"]
+
+  server2:
+    build: .
+    depends_on: [redis]
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      DATA_DIR: /data
+      RPC_PORT: 18862
+    volumes:
+      - ./server/texts:/data:ro
+      - ./server:/app
+    command: ["python", "/app/server.py"]
+    ports: ["18862:18862"]
+
+  server3:
+    build: .
+    depends_on: [redis]
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      DATA_DIR: /data
+      RPC_PORT: 18863
+    volumes:
+      - ./server/texts:/data:ro
+      - ./server:/app
+    command: ["python", "/app/server.py"]
+    ports: ["18863:18863"]
+
+  lb:
+    build: .
+    depends_on: [server1, server2, server3]
+    environment:
+      LB_ALGO: lc     # change to "lc" to test Least-Connections and "rr" for round robin
+      LB_PORT: 9000
+    volumes:
+      - ./lb:/app
+    command: ["python", "-u", "/app/lb.py"]
     ports:
-      - "18861:18861"
+      - "9000:9000"
 
   client:
     build: .
-    depends_on: [server]
+    depends_on: [lb]
     environment:
-      SERVER_HOST: server
-      SERVER_PORT: 18861
+      SERVER_HOST: lb
+      SERVER_PORT: 9000
       OUT_CSV: /app/latency.csv
     volumes:
       - ./client:/app
+
+

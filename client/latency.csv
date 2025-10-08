@@ -1,8 +1,8 @@
 i,file,keyword,count,latency_ms
-1,bee_movie_script.txt,bee,94,5.064
-2,bee_movie_script.txt,honey,51,5.582
-3,bee_movie_script.txt,the,259,5.185
-4,bee_movie_script.txt,you,327,4.502
-5,bee_movie_script.txt,Barry,50,4.945
-6,bee_movie_script.txt,bee,94,1.003
-7,bee_movie_script.txt,honey,51,1.217
+1,bee_movie_script.txt,bee,94,8.029
+2,bee_movie_script.txt,honey,51,3.348
+3,bee_movie_script.txt,the,259,3.126
+4,bee_movie_script.txt,you,327,3.455
+5,bee_movie_script.txt,Barry,50,4.238
+6,bee_movie_script.txt,bee,94,3.197
+7,bee_movie_script.txt,honey,51,3.264

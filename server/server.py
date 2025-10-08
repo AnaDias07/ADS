@@ -29,6 +29,12 @@ class WordCountService(rpyc.Service):
 
 if __name__ == "__main__":
     port = int(os.getenv("RPC_PORT", "18861"))
-    t = ThreadedServer(WordCountService, port=port, protocol_config={"allow_public_attrs": True})
-    print(f"RPyC server listening on {port}, Redis at {REDIS_HOST}:{REDIS_PORT}, data dir {DATA_DIR}")
+    host = "0.0.0.0"
+    print(f"[SRV] starting RPyC on {host}:{port} (Redis {REDIS_HOST}:{REDIS_PORT}, data {DATA_DIR})", flush=True)
+    t = ThreadedServer(
+        WordCountService,
+        hostname=host,
+        port=port,
+        protocol_config={"allow_public_attrs": True},
+    )
     t.start()
